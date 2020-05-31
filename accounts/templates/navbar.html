@@ -1,0 +1,43 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm fixed-top text-capitalize">
+    <div class="container">
+        <a class="navbar-brand" href="{% url 'home' %}">crm</a>
+        <button class="navbar-toggler d-lg-none border-0" type="button" data-toggle="collapse"
+            data-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavId">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            {% if request.user.is_staff %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'home' %}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'products' %}">Products</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin">Admin</a>
+                </li>
+            {% endif %}    
+            </ul>
+            <ul class="navbar-nav ml-auto">
+            {% if user.is_authenticated %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">hello, {{user.username}} <img src="{{request.user.customer.profile_pic.url}}" alt="" class="card-img rounded-circle" style="width:24px; height:24px; object-fit:cover;"></a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownId">
+                        <a class="dropdown-item" href="{% url 'account' %}">Settings</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{% url 'logout' %}">logout</a>
+                    </div>
+                </li>
+            {% else %}    
+               
+                 <li class="nav-item">
+                    <a class="nav-link" href="{% url 'login' %}">Login</a>
+                </li>
+            {% endif %}      
+            </ul>
+        </div>
+    </div>
+</nav>

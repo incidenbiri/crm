@@ -1,0 +1,61 @@
+{% extends 'main.html' %}
+
+{% block content %}
+{% include 'accounts/status.html' %}
+<div class="row">
+    <div class="col-lg-8 mb-3">
+        <div class="card border-0">
+            <div class="card-body table-responsive table-borderless">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Customer</th>
+                            <th scope="col">Product</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Category</th>
+                            <th scope="col">Date Ordered</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for order in orders %}
+                        <tr>
+                            <td>{{order.customer.name}}</td>
+                            <td>{{order.product.name}}</td>
+                            <td>{{order.status}}</td>
+                            <td>{{order.product.category}}</td>
+                            <td>{{order.date_created}}</td>
+                        </tr>
+                    {% endfor %}    
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="card border-0">
+            <div class="card-body">
+                <table class="table table-responsive table-borderless">
+                    <thead>
+                        <tr>
+                            <th scope="col"></th>
+                            <th scope="col">Customer</th>
+                            <th scope="col">Phone</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for customer in customers %}
+                        <tr>
+                            <td><a href="{% url 'customer' customer.id %}"><i class="fas fa-link"></i></a></td>
+                            <td>{{customer.name}}</td>
+                            <td>{{customer.phone}}</td>
+                        </tr>
+                        {% endfor %}    
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}

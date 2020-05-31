@@ -1,0 +1,23 @@
+{% extends 'main.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-6">
+        <div class="card shadow-sm border-0">
+            <div class="card-body">
+                <div class="alert alert-danger mb-3" role="alert">
+                    Are you sure you want to delete "{{item}}" ?
+                </div>
+                <form action="{% url 'delete_order' item.id %}" method="POST">
+                    {% csrf_token %}
+
+                    <a href="{% url 'home' %}" class="btn btn-block btn-light">Cancel</a>
+                    <input type="submit" value="Delete" class="btn btn-danger btn-block">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}
